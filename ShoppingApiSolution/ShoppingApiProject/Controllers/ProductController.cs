@@ -3,11 +3,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YourClassLibrary; 
+using System.Linq;
+using YourClassLibrary;
 
 [Authorize]
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]s")]  // Adjusted route to maintain consistency
 public class ProductController : ControllerBase
 {
     private readonly AppDbContext _dbContext;
@@ -17,7 +18,7 @@ public class ProductController : ControllerBase
         _dbContext = dbContext;
     }
 
-    
+    // Get all products
     [HttpGet]
     public IActionResult Get()
     {
@@ -25,7 +26,7 @@ public class ProductController : ControllerBase
         return Ok(products);
     }
 
-    
+    // Get products by category
     [HttpGet("byCategory/{categoryId}")]
     public IActionResult GetByCategory(int categoryId)
     {
@@ -36,6 +37,7 @@ public class ProductController : ControllerBase
         return Ok(products);
     }
 
+    // Add a new product
     [HttpPost]
     public IActionResult AddProduct([FromBody] Product product)
     {
@@ -49,7 +51,4 @@ public class ProductController : ControllerBase
 
         return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
     }
-
-   
-
 }
