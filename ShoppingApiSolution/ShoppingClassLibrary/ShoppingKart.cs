@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 
-public class ShoppingCart
+public class ShoppingKart
 {
     public int Id { get; set; }
     public string User { get; set; }
